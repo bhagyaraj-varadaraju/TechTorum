@@ -1,46 +1,41 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-
-import HomeFeed from './Pages/ErrorPage'
+import HomeFeed from './Pages/HomeFeed'
 import ErrorPage from './Pages/ErrorPage'
-import CreatePost from './Pages/ErrorPage'
-import ViewPost from './Pages/ErrorPage'
-import EditPost from './Pages/ErrorPage'
-import NavHeader from './Components/NavHeader'
-
+import CreatePost from './Pages/CreatePost'
+import ViewPost from './Pages/ViewPost'
+import EditPost from './Pages/EditPost'
+import RootLayout from './Pages/RootLayout'
 import './App.css'
+
+const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <RootLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        { index: true, element: <HomeFeed /> },
+        {
+            path: '/new-post',
+            element: <CreatePost />,
+            
+        },
+        {
+            path: '/:title-:id',
+            element: <ViewPost />,
+        },
+        {
+            path: '/:id/edit',
+            element: <EditPost />,
+        }
+      ]
+    }
+])
 
 function App() {
 
-    const router = createBrowserRouter([
-        {
-            path: "/",
-            element: <HomeFeed />,
-            errorElement: <ErrorPage />,
-            children:
-            [
-                {
-                    path: "new-post",
-                    element: <CreatePost />
-                },
-                {
-                    path: ":title-:id",
-                    element: <ViewPost />
-                },
-                {
-                    path: ":id/edit",
-                    element: <EditPost />
-                }
-            ]
-        }
-    ]);
-
-    return (
+    return(
         <div className="App">
-            <NavHeader />
-            
-            <div className="whole-page">
-                <RouterProvider router={router} />
-            </div>
+            <RouterProvider router={router} />
         </div>
     )
 }
