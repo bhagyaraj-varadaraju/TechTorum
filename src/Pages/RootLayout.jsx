@@ -1,14 +1,16 @@
 import NavHeader from "../Components/NavHeader"
+import { Container } from "@chakra-ui/react"
 import { Outlet } from "react-router-dom"
+
 
 function RootLayout() {
 
     return (
         <div className="root-layout">
             <NavHeader />
-            <main>
+            <Container m="80px auto">
                 <Outlet />
-            </main>
+            </Container>
         </div>
     )
 }

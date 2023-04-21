@@ -5,28 +5,28 @@ import { supabase } from '../SupabaseClient';
 
 function CreatePost() {
     // For handling the form inputs
-    const [info, setInfo] = useState({ title: "", content: "", image: "" });
+    const [post, setPost] = useState({ title: "", content: "", image: "" })
 
     const createPost = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
 
         //CREATE the Post
         await supabase
         .from('Posts')
-        .insert({ title: info.title, content: info.content, imageURL: info.image});
+        .insert({ title: post.title, content: post.content, imageURL: post.image})
 
-        alert("Post created successfully");
-        setInfo({ title: "", content: "", image: "" });
+        alert("Post created successfully")
+        setPost({ title: "", content: "", image: "" })
     }
 
     return (
-        <Card align='center' size='lg' maxW='md'>
+        <Card align='center' w='md'>
             <CardHeader>
                 <Heading size='md'>Create your post</Heading>
             </CardHeader>
 
             <CardBody>
-                <PostInputForm info={info} setInfo={setInfo} />
+                <PostInputForm post={post} setPost={setPost} />
             </CardBody>
 
             <CardFooter>

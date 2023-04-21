@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { Routes, Route } from "react-router-dom"
+import { Card } from '@chakra-ui/react'
 
-
-function Comments() {
-
+function Comments({ comments }) {
 
     return (
-        <div>
+        <Card>
             
-        </div>
+
+        </Card>
     )
 }
 

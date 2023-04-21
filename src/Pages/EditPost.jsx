@@ -5,16 +5,29 @@ import { supabase } from '../SupabaseClient';
 
 const EditPost = () => {
     // For handling the form inputs
-    const [info, setInfo] = useState({ title: "", content: "", image: "" });
+    const [post, setPost] = useState({ title: "", content: "", image: "" });
+
+    const updateUpvotes = async (event) => {
+        event.preventDefault()
+
+        // UPDATE the upvoteCount in state variable
+        setPost({ title: post.title , content: post.content, imageURL: post.imageURL, upvoteCount: post.upvoteCount + 1, comments: post.comments})
+
+        // UPDATE the selected Post in databse
+        await supabase
+        .from("Posts")
+        .update({upvoteCount: post.upvoteCount + 1})
+        .eq('postId', id);
+    }
 
     return (
-        <Card align='center' size='lg' maxW='md'>
+        <Card align='center' w='md'>
             <CardHeader>
                 <Heading size='md'>Edit this post</Heading>
             </CardHeader>
 
             <CardBody>
-                <PostInputForm info={info} setInfo={setInfo} />
+                <PostInputForm post={post} setPost={setPost} />
             </CardBody>
 
             <CardFooter>

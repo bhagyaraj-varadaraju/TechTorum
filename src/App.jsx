@@ -13,22 +13,24 @@ const router = createBrowserRouter([
       element: <RootLayout />,
       errorElement: <ErrorPage />,
       children: [
-        { index: true, element: <HomeFeed /> },
         {
-            path: '/new-post',
-            element: <CreatePost />,
-            
+            index: true,
+            element: <HomeFeed />
         },
         {
-            path: '/:title-:id',
-            element: <ViewPost />,
+            path: '/new-post',
+            element: <CreatePost />
+        },
+        {
+            path: '/:title/:id',
+            element: <ViewPost />
         },
         {
             path: '/:id/edit',
-            element: <EditPost />,
+            element: <EditPost />
         }
       ]
-    }
+    },
 ])
 
 function App() {
