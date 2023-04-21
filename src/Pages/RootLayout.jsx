@@ -8,7 +8,7 @@ function RootLayout() {
     return (
         <div className="root-layout">
             <NavHeader />
-            <Container m="80px auto">
+            <Container m="20px auto">
                 <Outlet />
             </Container>
         </div>

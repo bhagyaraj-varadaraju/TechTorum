@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { Card, CardHeader, CardBody, CardFooter, Button, Heading, Image, Text } from '@chakra-ui/react';
+import { Card, CardHeader, CardBody, CardFooter, Button, Heading, Image, Text, VStack } from '@chakra-ui/react';
 import TimeAgo from 'react-timeago'
 import Comments from '../Components/Comments';
 import { supabase } from '../SupabaseClient';
 
 function ViewPost() {
-    const [post, setPost] = useState({ title: "", content: "", imageURL: "", upvoteCount: 0, comments:[]});
+    const [post, setPost] = useState({ timestamp:"", title: "", content: "", imageURL: "", upvoteCount: 0, comments:[]});
     const { title, id } = useParams();
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function ViewPost() {
                 .eq('postId', id);
 
             // Set the retrieved post data to the state variable
-            if (data.length != 0) {
+            if (data && data.length != 0) {
                 setPost(data[0]);
             }
         }
@@ -43,7 +43,7 @@ function ViewPost() {
         event.preventDefault()
 
         // UPDATE the upvoteCount in state variable
-        setPost({ title: post.title , content: post.content, imageURL: post.imageURL, upvoteCount: post.upvoteCount + 1, comments: post.comments})
+        setPost(post => ({...post, upvoteCount: post.upvoteCount + 1}))
 
         // UPDATE the selected Post in databse
         await supabase
@@ -52,13 +52,20 @@ function ViewPost() {
         .eq('postId', id);
     }
 
+    if (!post) {
+        return null
+    }
+
     return (
-        <Card w='lg' h='lg' p='4' justify='left'>
+        <Card w='lg' h='lg' p='4'>
             <CardBody>
+            <VStack spacing='4' align='start'>
+                <Text>Posted <TimeAgo date={post.timestamp} /></Text>
+
                 <Heading size='md'>{post.title}</Heading>
 
-                <Text>{post.content}</Text>
-                
+                <Text textAlign='left'>{post.content}</Text>
+
                 {post.imageURL &&
                     <Image
                     src={post.imageURL}
@@ -66,6 +73,7 @@ function ViewPost() {
                     borderRadius='lg'
                   />
                 }
+            </VStack>
             </CardBody>
 
             <CardFooter>

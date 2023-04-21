@@ -3,7 +3,7 @@ import { Card } from "@chakra-ui/react"
 
 function ErrorPage() {
     const Caughterror = useRouteError()
-    if (!Caughterror) {
+    if (!Caughterror || !Caughterror.error) {
         return
     }
 

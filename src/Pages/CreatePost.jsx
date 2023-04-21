@@ -15,8 +15,8 @@ function CreatePost() {
         .from('Posts')
         .insert({ title: post.title, content: post.content, imageURL: post.image})
 
-        alert("Post created successfully")
         setPost({ title: "", content: "", image: "" })
+        window.location = "/";
     }
 
     return (
