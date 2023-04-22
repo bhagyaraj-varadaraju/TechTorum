@@ -37,7 +37,6 @@ function ViewPost() {
             .delete()
             .eq('postId', id);
 
-        alert("Post deleted successfully");
         window.location = "/";
     }
 
@@ -90,7 +89,7 @@ function ViewPost() {
                         <FontAwesomeIcon icon={faTrash} onClick={deletePost} size='xl' cursor='pointer' color='teal' />
                     </Flex>
 
-                    <Comments id={id} comments={post.comments || []} />
+                    <Comments id={id} comments={post.comments} />
                 </VStack>
             </CardFooter>
         </Card>

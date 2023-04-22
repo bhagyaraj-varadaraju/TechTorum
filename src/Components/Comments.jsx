@@ -11,7 +11,8 @@ function Comments({ id, comments }) {
     }
 
     const handleSubmit = async (event) => {
-        comments.push(comment)
+        //Append the new comment to the front of the comments array
+        comments.unshift(comment)
 
         //UPDATE the post with new comment
         await supabase

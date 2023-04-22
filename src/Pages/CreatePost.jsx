@@ -13,7 +13,7 @@ function CreatePost() {
         //CREATE the Post
         await supabase
         .from('Posts')
-        .insert({ title: post.title, content: post.content, imageURL: post.image})
+        .insert({ title: post.title, content: post.content, imageURL: post.image, comments: []})
 
         setPost({ title: "", content: "", image: "" })
         window.location = "/";

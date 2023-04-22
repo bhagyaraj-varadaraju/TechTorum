@@ -1,7 +1,7 @@
 import { Flex, Spacer, ButtonGroup, Heading, Link, Input } from "@chakra-ui/react"
 import { NavLink } from "react-router-dom"
 
-function NavHeader() {
+function NavHeader({searchInput, onSearchInputChange}) {
 
     return (
         <Flex minWidth='max-content' alignItems='center' gap='2' bg='teal' color='#F7FAFC' px='8' py='4'>
@@ -11,7 +11,7 @@ function NavHeader() {
             </Flex>
             
             <Spacer />
-            <Input size='md' w='sm' type='text' variant='filled' color='black' _focus={{bg: 'gray.100'}} focusBorderColor='teal.500' placeholder='Search' />
+            <Input value={searchInput} onChange={({target:{value}}) => onSearchInputChange(value)} size='md' w='sm' type='text' variant='filled' color='black' _focus={{bg: 'gray.100'}} focusBorderColor='teal.500' placeholder='Search' />
             <Spacer />
 
             <ButtonGroup gap='2'>

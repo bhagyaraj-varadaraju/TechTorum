@@ -6,6 +6,7 @@ import ViewPost from './Pages/ViewPost'
 import EditPost from './Pages/EditPost'
 import RootLayout from './Pages/RootLayout'
 import './App.css'
+import { SearchProvider } from './context/SearchContext'
 
 const router = createBrowserRouter([
     {
@@ -37,7 +38,9 @@ function App() {
 
     return(
         <div className="App">
-            <RouterProvider router={router} />
+            <SearchProvider>
+                <RouterProvider router={router} />
+            </SearchProvider>
         </div>
     )
 }

@@ -4,7 +4,7 @@ Submitted by: **Bhagya Raj Varadaraju**
 
 This web app: **A full stack web app for posting content related to tech**
 
-Time spent: **12** hours spent in total
+Time spent: **16** hours spent in total
 
 ## Required Features
 
