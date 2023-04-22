@@ -37,7 +37,7 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-
+https://user-images.githubusercontent.com/20358558/233805848-b2f04290-77a3-4063-a374-29e671f8ecc1.mov
 
 ## License
 
