@@ -31,17 +31,17 @@ function HomeFeed() {
             <VStack spacing={6}>
                 <HStack spacing={3}>
                     <Text>Order by:</Text>
-                    <Button >Newest</Button>
-                    <Button>Most Popular</Button>
+                    <Button variant='solid' colorScheme='teal'>Newest</Button>
+                    <Button variant='solid' colorScheme='teal'>Most Popular</Button>
                 </HStack>
 
                 {
-                    data && data.length > 0 ?
-                    data.map((post, idx) =>
+                    data && data.length > 0
+                    ? data.map((post, idx) =>
                         <Link key={'link_' + idx} to={'/' + post.title + '/' + post.postId}>
                             <FeedCard key={idx} timestamp={post.timestamp} title={post.title} upvotes={post.upvoteCount} />
                         </Link>)
-                    : <Heading size='md'>No posts yet</ Heading>
+                    : <Heading size='md'>No posts yet</Heading>
                 }
 
             </VStack>

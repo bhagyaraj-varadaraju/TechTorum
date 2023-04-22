@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { Card, CardHeader, CardBody, CardFooter, Heading, Button } from '@chakra-ui/react'
 import PostInputForm from '../Components/PostInputForm'
 import { supabase } from '../SupabaseClient';
@@ -6,18 +7,31 @@ import { supabase } from '../SupabaseClient';
 const EditPost = () => {
     // For handling the form inputs
     const [post, setPost] = useState({ title: "", content: "", image: "" });
+    const { id } = useParams();
 
-    const updateUpvotes = async (event) => {
+    useEffect(() => {
+        const readPost = async () => {
+            const {data} = await supabase
+                                        .from("Posts")
+                                        .select()
+                                        .eq('postId', id);
+
+            setPost(data[0]);
+        }
+
+        readPost().catch(console.error);
+    }, [])
+
+    const updatePost = async (event) => {
         event.preventDefault()
-
-        // UPDATE the upvoteCount in state variable
-        setPost({ title: post.title , content: post.content, imageURL: post.imageURL, upvoteCount: post.upvoteCount + 1, comments: post.comments})
 
         // UPDATE the selected Post in databse
         await supabase
         .from("Posts")
-        .update({upvoteCount: post.upvoteCount + 1})
+        .update({ title: post.title, content: post.content, imageURL: post.image })
         .eq('postId', id);
+
+        window.location = "/" + post.title + "/" + id ;
     }
 
     return (
@@ -31,7 +45,7 @@ const EditPost = () => {
             </CardBody>
 
             <CardFooter>
-                <Button variant='solid' colorScheme='teal'>Save and publish</Button>
+                <Button variant='solid' colorScheme='teal' onClick={updatePost}>Save and publish</Button>
             </CardFooter>
 
         </Card>

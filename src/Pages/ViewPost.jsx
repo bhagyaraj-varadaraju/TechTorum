@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { Card, CardHeader, CardBody, CardFooter, Button, Heading, Image, Text, VStack } from '@chakra-ui/react';
+import { Card, CardBody, CardFooter, Flex, Spacer, Heading, Image, Text, VStack } from '@chakra-ui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import TimeAgo from 'react-timeago'
 import Comments from '../Components/Comments';
 import { supabase } from '../SupabaseClient';
 
 function ViewPost() {
-    const [post, setPost] = useState({ timestamp:"", title: "", content: "", imageURL: "", upvoteCount: 0, comments:[]});
+    const [post, setPost] = useState({ timestamp: "", title: "", content: "", imageURL: "", upvoteCount: 0, comments: [] });
     const { title, id } = useParams();
 
     useEffect(() => {
@@ -31,9 +33,9 @@ function ViewPost() {
 
         // DELETE the selected Post
         await supabase
-        .from("Posts")
-        .delete()
-        .eq('postId', id);
+            .from("Posts")
+            .delete()
+            .eq('postId', id);
 
         alert("Post deleted successfully");
         window.location = "/";
@@ -43,13 +45,13 @@ function ViewPost() {
         event.preventDefault()
 
         // UPDATE the upvoteCount in state variable
-        setPost(post => ({...post, upvoteCount: post.upvoteCount + 1}))
+        setPost(post => ({ ...post, upvoteCount: post.upvoteCount + 1 }))
 
         // UPDATE the selected Post in databse
         await supabase
-        .from("Posts")
-        .update({upvoteCount: post.upvoteCount + 1})
-        .eq('postId', id);
+            .from("Posts")
+            .update({ upvoteCount: post.upvoteCount + 1 })
+            .eq('postId', id);
     }
 
     if (!post) {
@@ -57,33 +59,40 @@ function ViewPost() {
     }
 
     return (
-        <Card w='lg' h='lg' p='4'>
+        <Card w='full' p='4'>
             <CardBody>
-            <VStack spacing='4' align='start'>
-                <Text>Posted <TimeAgo date={post.timestamp} /></Text>
+                <VStack spacing='4' align='start'>
+                    <Text>Posted <TimeAgo date={post.timestamp} /></Text>
 
-                <Heading size='md'>{post.title}</Heading>
+                    <Heading size='md'>{post.title}</Heading>
 
-                <Text textAlign='left'>{post.content}</Text>
+                    <Text textAlign='left'>{post.content}</Text>
 
-                {post.imageURL &&
-                    <Image
-                    src={post.imageURL}
-                    alt={post.title}
-                    borderRadius='lg'
-                  />
-                }
-            </VStack>
+                    {post.imageURL &&
+                        <Image
+                            src={post.imageURL}
+                            alt={post.title}
+                            borderRadius='lg'
+                        />
+                    }
+                </VStack>
             </CardBody>
 
             <CardFooter>
-                <Button variant='solid' colorScheme='teal' onClick={updateUpvotes}>Like</Button>
-                <Text>{post.upvoteCount}</Text>
-                <Link to={'/' + id + '/edit'}><Button variant='solid' colorScheme='teal'>Edit</Button></Link>
-                <Button variant='solid' colorScheme='teal' onClick={deletePost}>Delete</Button>
-                <Comments comments={post.comments}/>
-            </CardFooter>
+                <VStack spacing='4' align='start'>
+                    <Flex w='full' py='4' gap='4'>
+                        <FontAwesomeIcon icon={faThumbsUp} onClick={updateUpvotes} size='xl' cursor='pointer' color='teal' />
+                        <Text as='i'>{post.upvoteCount} upvotes</Text>
+                        
+                        <Spacer />
+                        
+                        <Link to={'/' + id + '/edit'}><FontAwesomeIcon icon={faEdit} size='xl' color='teal' /></Link>
+                        <FontAwesomeIcon icon={faTrash} onClick={deletePost} size='xl' cursor='pointer' color='teal' />
+                    </Flex>
 
+                    <Comments id={id} comments={post.comments || []} />
+                </VStack>
+            </CardFooter>
         </Card>
     )
 }
