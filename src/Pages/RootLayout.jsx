@@ -1,20 +1,25 @@
 import NavHeader from "../Components/NavHeader"
 import { Container } from "@chakra-ui/react"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { Outlet } from "react-router-dom"
 import { SearchContext } from "../context/SearchContext"
-
+import { Flex, Text } from "@chakra-ui/react"
 
 function RootLayout() {
     const {searchInput, setSearchInput} = useContext(SearchContext);
 
     return (
-        <div className="root-layout">
+        <Flex className="root-layout" direction='column' gap='8'>
             <NavHeader searchInput={searchInput} onSearchInputChange={setSearchInput} />
-            <Container m="20px auto">
+
+            <Container marginBottom='16'>
                 <Outlet />
             </Container>
-        </div>
+
+            <Flex position='absolute' w='full' justify='center' bottom='0' bg='teal' color='#F7FAFC' px='8' py='2'>
+                <Text size='sm'>Made with ❤️ using React</Text>
+            </Flex>
+        </Flex>
     )
 }
 

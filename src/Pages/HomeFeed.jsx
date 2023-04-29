@@ -26,7 +26,6 @@ function HomeFeed() {
                 .select()
                 .order('timestamp', { ascending: false });
 
-        console.log(data)
         // Set the retrieved posts to the state variable
         if(data.length != 0) {
             setData(data)

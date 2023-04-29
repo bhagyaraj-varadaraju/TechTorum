@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { Card, CardBody, CardFooter, Flex, Spacer, Heading, Image, Text, VStack } from '@chakra-ui/react';
+import { useParams, Link, useNavigate } from 'react-router-dom'
+import { Card, CardBody, CardFooter, Flex, Spacer, Heading, Image, Text, VStack, useToast } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import TimeAgo from 'react-timeago'
@@ -10,6 +10,8 @@ import { supabase } from '../SupabaseClient';
 function ViewPost() {
     const [post, setPost] = useState({ timestamp: "", title: "", content: "", imageURL: "", upvoteCount: 0, comments: [] });
     const { title, id } = useParams();
+    const toast = useToast();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const readPost = async () => {
@@ -37,7 +39,17 @@ function ViewPost() {
             .delete()
             .eq('postId', id);
 
-        window.location = "/";
+        navigate("/");
+
+        toast({
+            title: 'Story deleted successfully',
+            colorScheme: 'teal',
+            position: 'bottom-right',
+            variant: 'left-accent',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
     }
 
     const updateUpvotes = async (event) => {

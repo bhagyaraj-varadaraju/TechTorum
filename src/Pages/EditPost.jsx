@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { Card, CardHeader, CardBody, CardFooter, Heading, Button } from '@chakra-ui/react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { Card, CardHeader, CardBody, CardFooter, Heading, Button, useToast } from '@chakra-ui/react'
 import PostInputForm from '../Components/PostInputForm'
 import { supabase } from '../SupabaseClient';
 
@@ -8,6 +8,8 @@ const EditPost = () => {
     // For handling the form inputs
     const [post, setPost] = useState({ title: "", content: "", image: "" });
     const { id } = useParams();
+    const toast = useToast();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const readPost = async () => {
@@ -16,14 +18,14 @@ const EditPost = () => {
                                         .select()
                                         .eq('postId', id);
 
-            setPost(data[0]);
+            setPost({...data[0], image: data[0].imageURL});
         }
 
         readPost().catch(console.error);
     }, [])
 
     const updatePost = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
         // UPDATE the selected Post in databse
         await supabase
@@ -31,7 +33,17 @@ const EditPost = () => {
         .update({ title: post.title, content: post.content, imageURL: post.image })
         .eq('postId', id);
 
-        window.location = "/" + post.title + "/" + id ;
+        navigate("/" + post.title + "/" + id);
+
+        toast({
+            title: 'Story edited successfully',
+            colorScheme: 'teal',
+            position: 'bottom-right',
+            variant: 'left-accent',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
     }
 
     return (
