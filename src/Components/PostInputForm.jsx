@@ -8,12 +8,12 @@ function PostInputForm({post, setPost}) {
     }
 
     return(
-        <VStack w='sm' spacing={8}>
-            <Input type='text' variant='filled' focusBorderColor="teal.500" id="title" name="title" value={post.title} onChange={handleChange} placeholder='Title'/>
+        <VStack w={['xs', 'md', 'lg']} spacing={['4', '8', '8']} p='4'>
+            <Input type='text' variant='filled' _focus={{ bg: 'gray.100' }} focusBorderColor="teal.500" id="title" name="title" value={post.title} onChange={handleChange} placeholder='Title'/>
 
-            <Textarea type='text' variant='filled' focusBorderColor="teal.500" rows='8' id="content" name="content" value={post.content} onChange={handleChange} placeholder='Content'/>
+            <Textarea type='text' variant='filled' _focus={{ bg: 'gray.100' }} focusBorderColor="teal.500" rows='8' id="content" name="content" value={post.content} onChange={handleChange} placeholder='Content'/>
 
-            <Input type='text' variant='filled' focusBorderColor="teal.500" id="image" name="image" value={post.image} onChange={handleChange} placeholder='Image URL (Optional)'/>
+            <Input type='text' variant='filled' _focus={{ bg: 'gray.100' }} focusBorderColor="teal.500" id="image" name="image" value={post.image} onChange={handleChange} placeholder='Image URL (Optional)'/>
         </VStack>
     )
 }

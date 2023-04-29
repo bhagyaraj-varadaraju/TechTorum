@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Card, CardHeader, CardBody, CardFooter, Heading, Button, useToast } from '@chakra-ui/react'
+import { Card, VStack, Heading, Button, useToast } from '@chakra-ui/react'
 import PostInputForm from '../Components/PostInputForm'
 import { supabase } from '../SupabaseClient';
 
@@ -47,19 +47,15 @@ const EditPost = () => {
     }
 
     return (
-        <Card align='center' w='md'>
-            <CardHeader>
-                <Heading size='md'>Edit this post</Heading>
-            </CardHeader>
 
-            <CardBody>
+        <Card w={['xs', 'md', 'lg']} p={['4', '8', '8']} bg='teal.50' direction='column' align='center'>
+            <VStack spacing={['4', '8', '8']}>
+                <Heading fontSize={['md', 'lg', 'lg']}>Edit your post</Heading>
+
                 <PostInputForm post={post} setPost={setPost} />
-            </CardBody>
 
-            <CardFooter>
                 <Button variant='solid' colorScheme='teal' onClick={updatePost}>Save and publish</Button>
-            </CardFooter>
-
+            </VStack>
         </Card>
     )
 }

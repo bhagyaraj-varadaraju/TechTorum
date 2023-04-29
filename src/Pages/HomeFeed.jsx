@@ -50,10 +50,9 @@ function HomeFeed() {
     }
 
     return (
-        <div className="home-feed">
-            <VStack spacing={6}>
-                <HStack spacing={3}>
-                    <Text>Sort by:</Text>
+            <VStack spacing='4'>
+                <HStack spacing={['2', '4', '4']}>
+                    <Text color='#F7FAFC'>Sort by:</Text>
                     <Button variant='solid' isDisabled={sortByNewest} colorScheme='teal' onClick={readPostsSortedByTimestamp}>Newest</Button>
                     <Button variant='solid' isDisabled={!sortByNewest} colorScheme='teal' onClick={readPostsSortedByUpvotes}>Most Popular</Button>
                 </HStack>
@@ -66,9 +65,7 @@ function HomeFeed() {
                         </Link>)
                     : <Heading size='md'>No posts yet</Heading>
                 }
-
             </VStack>
-        </div>
     )
 }
 

@@ -7,6 +7,7 @@ import EditPost from './Pages/EditPost'
 import RootLayout from './Pages/RootLayout'
 import './App.css'
 import { SearchProvider } from './context/SearchContext'
+import { Flex } from '@chakra-ui/react'
 
 const router = createBrowserRouter([
     {
@@ -37,11 +38,12 @@ const router = createBrowserRouter([
 function App() {
 
     return(
-        <div className="App">
+        <Flex className="App" bg='teal.600'>
             <SearchProvider>
-                <RouterProvider router={router} />
+                <RouterProvider router={router}>
+                </RouterProvider>
             </SearchProvider>
-        </div>
+        </Flex>
     )
 }
 

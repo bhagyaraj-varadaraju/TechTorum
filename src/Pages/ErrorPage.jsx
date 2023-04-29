@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom"
-import { Card } from "@chakra-ui/react"
+import { Card, Flex, Heading, Text, Spacer } from "@chakra-ui/react"
 
 function ErrorPage() {
     const Caughterror = useRouteError()
@@ -10,16 +10,18 @@ function ErrorPage() {
     console.error(Caughterror)
 
     return (
-        <Card w='md' h='xs' mt="200" mx='auto' pt='20'>
-            <h1> Oops! </h1>
-            <p> Sorry, an unexpected error has occurred. </p>
-            <br />
-            <p>
-                <b> <i> {Caughterror.status} - {Caughterror.statusText} </i> </b>
-                <br />
-                <i> {Caughterror.error.message} </i>
-            </p>
-        </Card>
+        <Flex className='root-layout' direction='column' align='center' w='full'>
+            <Card w={['xs', 'md', 'lg']} p={['4', '8', '8']} bg='teal.50' my='auto' gap='2'>
+                <Heading fontSize={['md', 'lg', 'lg']}>Oops!</Heading>
+                <Text fontSize={['md', 'lg', 'lg']}> Sorry, an unexpected error has occurred. </Text>
+                <Spacer />
+                <Text fontSize={['md', 'lg', 'lg']}>
+                    <b> <i> {Caughterror.status} - {Caughterror.statusText} </i> </b>
+                    <br />
+                    <i> {Caughterror.error.message} </i>
+                </Text>
+            </Card>
+        </Flex>
     )
 }
 

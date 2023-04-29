@@ -1,26 +1,30 @@
-import { Flex, Spacer, Heading, Input } from "@chakra-ui/react"
+import { Image, Flex, Spacer, Heading, Input, Text } from "@chakra-ui/react"
 import { NavLink } from "react-router-dom"
 
 function NavHeader({ searchInput, onSearchInputChange }) {
 
     return (
-        <Flex minWidth='max-content' alignItems='center' gap='2' bg='teal' color='#F7FAFC' px='8' py='4'>
+        <Flex w='full' alignItems='center' bg='teal.700' color='#F7FAFC' px={['2', '4', '4']} py={['2', '4', '4']}>
             <NavLink to='/'>
-                <Flex gap='1'>
-                    <img src="/chat-balloons.png" width="35px" height="35px" alt="Logo image" />
-                    <Heading size='lg'>TechTorum</Heading>
+                <Flex gap={['1', '1', '2']} alignItems='center'>
+                    <Image htmlHeight='28px' htmlWidth='28px' src="/chat-balloons.png" alt="Logo" />
+                    <Heading fontSize={['md', '2xl', '3xl']}>TechTorum</Heading>
                 </Flex>
             </NavLink>
 
             <Spacer />
 
-            <Flex gap='8' alignItems='center'>
+            <Flex gap={['2', '4', '8']} alignItems='center'>
                 <Input value={searchInput} onChange={({ target: { value } }) => onSearchInputChange(value)}
-                    size='md' type='text' variant='filled' color='black' _focus={{ bg: 'gray.100' }}
-                    focusBorderColor='teal.500' borderRadius='8' placeholder='🔍 Search' />
+                    size={['xs', 'md', 'md']} type='text' variant='filled' color='black' _focus={{ bg: 'gray.100' }}
+                    focusBorderColor='teal.500' borderRadius={['4', '8', '8']} placeholder='🔍 Search' />
 
-                <NavLink to='/' style={({isActive})=>({textDecoration: isActive ? 'underline': ''})}>Home</NavLink>
-                <NavLink to='/new-post' style={({isActive})=>({textDecoration: isActive ? 'underline': ''})}>Write</NavLink>
+                <NavLink to='/' style={({ isActive }) => ({ textDecoration: isActive ? 'underline' : '' })}>
+                    <Text fontSize={['xs', 'sm', 'sm']}>Home</Text>
+                </NavLink>
+                <NavLink to='/new-post' style={({ isActive }) => ({ textDecoration: isActive ? 'underline' : '' })}>
+                    <Text fontSize={['xs', 'sm', 'sm']}>Write</Text>
+                </NavLink>
             </Flex>
         </Flex>
     )

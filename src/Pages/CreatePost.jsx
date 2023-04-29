@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Card, CardHeader, CardBody, CardFooter, Heading, Button, useToast } from '@chakra-ui/react'
+import { Card, VStack, Heading, Button, useToast } from '@chakra-ui/react'
 import PostInputForm from '../Components/PostInputForm'
 import { supabase } from '../SupabaseClient';
 import { useNavigate } from 'react-router-dom';
@@ -35,19 +35,14 @@ function CreatePost() {
     }
 
     return (
-        <Card align='center' w='md'>
-            <CardHeader>
-                <Heading size='md'>Create your post</Heading>
-            </CardHeader>
-
-            <CardBody>
+        <Card w={['xs', 'md', 'lg']} p={['4', '8', '8']} bg='teal.50' direction='column' align='center'>
+            <VStack spacing={['4', '8', '8']}>
+                <Heading fontSize={['md', 'lg', 'lg']}>Create your post</Heading>
+            
                 <PostInputForm post={post} setPost={setPost} />
-            </CardBody>
-
-            <CardFooter>
+            
                 <Button variant='solid' colorScheme='teal' onClick={createPost}>Publish</Button>
-            </CardFooter>
-
+            </VStack>
         </Card>
     )
 }

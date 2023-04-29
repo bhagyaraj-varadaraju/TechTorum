@@ -1,17 +1,17 @@
-import { Heading, Card, CardHeader, CardBody, CardFooter, Text, VStack } from '@chakra-ui/react'
+import { Heading, Card, Text, VStack } from '@chakra-ui/react'
 import TimeAgo from 'react-timeago'
 
 function FeedCard(props) {
 
     return (
-        <Card w='lg' p='4'>
-            <VStack spacing='4' align='start'>
-                <Text>Posted <TimeAgo date={props.timestamp} /></Text>
+        <Card w={['xs', 'md', 'lg']} p='4' bg='teal.50' direction='column'>
+            <VStack spacing={['2', '4', '4']} align='left' textAlign='left'>
+                <Text fontSize={['xs', 'sm', 'sm']}>Posted <TimeAgo date={props.timestamp} /></Text>
 
-                <Heading size='md'>{props.title}</Heading>
+                <Heading fontSize={['md', 'lg', 'lg']}>{props.title}</Heading>
 
-                <Text>{props.upvotes} upvotes</Text>
-            </VStack>
+                <Text fontSize={['xs', 'sm', 'sm']}>{props.upvotes} upvotes</Text>
+             </VStack>
         </Card>
     )
 }

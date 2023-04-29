@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { Card, CardBody, CardFooter, Flex, Spacer, Heading, Image, Text, VStack, useToast } from '@chakra-ui/react';
+import { Card, Flex, Spacer, Heading, Image, Text, VStack, useToast } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import TimeAgo from 'react-timeago'
@@ -49,7 +49,7 @@ function ViewPost() {
             status: 'success',
             duration: 3000,
             isClosable: true,
-          });
+        });
     }
 
     const updateUpvotes = async (event) => {
@@ -70,14 +70,13 @@ function ViewPost() {
     }
 
     return (
-        <Card w='full' p='4'>
-            <CardBody>
-                <VStack spacing='4' align='start'>
-                    <Text>Posted <TimeAgo date={post.timestamp} /></Text>
+        <Card w={['xs', 'md', 'lg']} p={['4', '8', '8']} bg='teal.50' direction='column'>
+                <VStack spacing={['2', '4', '4']} align='left' textAlign='left'>
+                    <Text fontSize={['xs', 'sm', 'sm']}>Posted <TimeAgo date={post.timestamp} /></Text>
 
-                    <Heading size='md'>{post.title}</Heading>
+                    <Heading fontSize={['md', 'lg', 'lg']}>{post.title}</Heading>
 
-                    <Text textAlign='left'>{post.content}</Text>
+                    <Text fontSize={['md', 'lg', 'lg']}>{post.content}</Text>
 
                     {post.imageURL &&
                         <Image
@@ -87,23 +86,21 @@ function ViewPost() {
                         />
                     }
                 </VStack>
-            </CardBody>
-
-            <CardFooter>
-                <VStack spacing='4' align='start'>
-                    <Flex w='full' py='4' gap='4'>
+            
+                <VStack mt={['8', '16', '16']} spacing={['2', '4', '4']} align='left' textAlign='left'>
+                    <Flex w='full' gap={['2', '4', '4']} direction='row' align='center'>
                         <FontAwesomeIcon icon={faThumbsUp} onClick={updateUpvotes} size='xl' cursor='pointer' color='teal' />
-                        <Text as='i'>{post.upvoteCount} upvotes</Text>
-                        
+                        <Text fontSize={['xs', 'sm', 'sm']}as='i'>{post.upvoteCount} upvotes</Text>
+
                         <Spacer />
-                        
+
                         <Link to={'/' + id + '/edit'}><FontAwesomeIcon icon={faEdit} size='xl' color='teal' /></Link>
                         <FontAwesomeIcon icon={faTrash} onClick={deletePost} size='xl' cursor='pointer' color='teal' />
                     </Flex>
 
                     <Comments id={id} comments={post.comments} />
+                    
                 </VStack>
-            </CardFooter>
         </Card>
     )
 }
