@@ -1,14 +1,8 @@
-# Web Development Final Project - *Techorum*
+## TechTorum
+This web app is a **responsive full stack application for posting content related to tech**
 
-Submitted by: **Bhagya Raj Varadaraju**
-
-This web app: **A full stack web app for posting content related to tech**
-
-Time spent: **16** hours spent in total
-
-## Required Features
-
-The following **required** functionality is completed:
+## Implemented Features
+The following **required** functionality has been completed:
 
 - [x] **A create form that allows the user to create posts**
 - [x] **Posts have a title and optionally additional textual content and/or an image added as an external image URL**
@@ -22,7 +16,7 @@ The following **required** functionality is completed:
 - [x] **Each post should have an upvote button on the post's page. Each click increases its upvotes count by one and users can upvote any number of times**
 - [x] **A previously created post can be edited or deleted from its post page**
 
-The following **optional** features are implemented:
+Below are the **upcoming** features that will be implemented soon:
 
 - [ ] Users can only edit and deleted posts or delete comments by entering the secret key, which is set by the user during post creation
 - [ ] Upon launching the web app, the user is assigned a random user ID. It will be associated with all posts and comments that they make and displayed on them.
@@ -34,13 +28,11 @@ The following **optional** features are implemented:
 - [ ] Display a loading animation whenever data is being fetched
 
 ## Video Walkthrough
+Here's a walkthrough of the implemented features:
 
-Here's a walkthrough of implemented user stories:
-
-https://user-images.githubusercontent.com/20358558/233805848-b2f04290-77a3-4063-a374-29e671f8ecc1.mov
+https://user-images.githubusercontent.com/20358558/235327897-dddcbde5-14d1-48b8-93f9-b4eca8d7e2b2.mov
 
 ## License
-
     Copyright [2023] [Bhagya Raj Varadaraju]
 
     Licensed under the Apache License, Version 2.0 (the "License");
